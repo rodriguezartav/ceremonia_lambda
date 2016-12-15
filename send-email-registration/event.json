@@ -1,0 +1,33 @@
+{
+"body-json" : { "nombre": "roberto", "email": "roberdto+n@rodcocr.com", "celular": "87033825", "jueves": 1 },
+"params" : {
+"path" : {
+        "name" : "Eventos"
+            }
+    ,"querystring" : {
+        "query": "select id from salesforce.Cierre__c"
+    }
+    ,"header" : {
+        "Authorization" : "Bearer 00DA0000000ZS6S!AQ8AQAm0xrlkAQ3uNkgZ226LcRQWg4bwQpr5k7RFFuI1jdSNh4F7uE51MXaC0SUlQNwwb91DeYeTsvNlkKreYVczXE7.1T1S"
+        ,        "Instance-Url" : "https:\/\/na7.salesforce.com"
+            }
+    },
+"stage-variables" : {
+},
+"context" : {
+    "account-id" : "904575228420",
+    "api-id" : "pnl4txjd21",
+    "api-key" : "test-invoke-api-key",
+    "authorizer-principal-id" : "",
+    "caller" : "904575228420",
+    "cognito-authentication-provider" : "",
+    "cognito-authentication-type" : "",
+    "cognito-identity-id" : "",
+    "cognito-identity-pool-id" : "",
+    "http-method" : "POST",
+    "stage" : "test-invoke-stage",
+    "source-ip" : "test-invoke-source-ip",
+    "user" : "904575228420",
+    "user-agent" : "Apache-HttpClient/4.3.4 (java 1.5)"
+  }
+}
