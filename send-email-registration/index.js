@@ -1,5 +1,7 @@
+var dotenv = require("dotenv");
+dotenv.load();
+
 var AWS = require('aws-sdk');
-var requestify = require('requestify');
 var UltraSES = require('ultrases');
 var Plates = require("plates");
 var Request = require("superagent");
@@ -32,17 +34,16 @@ exports.handler = function( event, context, callback ) {
 
 
 function Lambda(event){
-
   this.bookId = '58459e566d3f1e0300613e49';
   this.baseUrl = 'https://api.fieldbook.com/v1/' + this.bookId;
-  this.username = "key-1";
-  this.password = "NTJBmVThqU97mkSWnaJH";
+  this.username = process.env.USERNAME;
+  this.password = process.env.PASSWORD;
   this.url = this.baseUrl + '/pacientes';
 
   this.record = {
     nombre: event["body-json"].nombre,
     email: event["body-json"].email,
-    celular: event["body-json"].celular.replaceAll(" ","").replaceAll("-",""),
+    celular: event["body-json"].celular,
     jueves: event["body-json"].jueves,
     sabado: event["body-json"].sabado,
     domingo: event["body-json"].domingo,
@@ -97,9 +98,4 @@ Lambda.prototype.getRequest = function(url, method,query){
   .query(query)
   .auth(this.username,this.password)
 }
-
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
 

@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^2.0.0",
     "kew": "^0.7.0",
     "plates": "^0.4.11",
     "q": "^1.4.1",
