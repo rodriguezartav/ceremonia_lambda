@@ -57,6 +57,8 @@ Lambda.prototype.checkRecordExists = function(){
 
   this.getRequest(url, "get","")
   .end( function(err,res){
+    console.log(this.record)
+    console.log(res.body)
     if(err) return defered.reject( new Error(err) );
     if( res.body && res.body.length > 0 ) return defered.reject( new Error(_this.record.email + " exists (code 1)") );
     defered.resolve(res.body);
@@ -67,6 +69,27 @@ Lambda.prototype.checkRecordExists = function(){
 
 Lambda.prototype.createRecord = function(){
   var defered = q.defer();
+
+  var monto = 0;
+  var dias = 0;
+  var personas = 0;
+  if( this.record.jueves ){
+    personas = this.record.jueves
+    dias++;
+  }
+  if( this.record.sabado ){
+   personas = this.record.juevsabadoes;
+    dias++;
+  }
+  if( this.record.domingo ){
+    personas = this.record.domingo;
+    dias++;
+  }
+  if( dias == 1) monto = 150 * personas;
+  if( dias == 2) monto = 300 * personas;
+  if( dias == 3) monto = 500 * personas;
+  this.record.monto = monto;
+  this.record.personas = personas;
 
   this.getRequest(this.url, "post","")
   .send(this.record)
@@ -82,7 +105,9 @@ Lambda.prototype.createRecord = function(){
 Lambda.prototype.sendEmail = function(){
   var defered = q.defer();
 
-  var email = {to: this.record.email, subject: 'Informacion para completar su reservacion.'};
+
+  this.record.monto2 = this.record.monto;
+  var email = {cc: "roberto@3vot.com", to: this.record.email, subject: 'Informacion para completar su reservacion.'};
   var html = fs.readFileSync("./template.html");
   var output = Plates.bind(html, this.record);
 
